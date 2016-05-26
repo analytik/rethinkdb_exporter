@@ -225,15 +225,6 @@ func extractAllMetrics(sess *r.Session, scrapes chan<- scrapeResult) error {
 			}
 		case "table":
 			{
-				res, err := r.DB(s.DB).Table(s.Table).Count().Run(sess)
-				if err != nil {
-					return err
-				}
-				var count float64
-				if err = res.One(&count); err != nil {
-					return err
-				}
-				scrapes <- s.newScrapeResult("table_docs_total", count)
 				countTables++
 			}
 		case "table_server":
